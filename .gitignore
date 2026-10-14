@@ -1,0 +1,8 @@
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# OS generated files
+.DS_Store
+Thumbs.db

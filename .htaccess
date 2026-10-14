@@ -1,0 +1,51 @@
+# Prevent directory browsing
+Options -Indexes
+
+# Protect sensitive folders
+RewriteEngine On
+RewriteBase /
+
+# Prevent access to core folders
+RewriteRule ^(config|models|controllers|views|helpers|vendor)/ - [F,L]
+
+# Clean URLs Mapping
+# Skip real files and directories
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Admin Routes
+RewriteRule ^Admin/?$ index.php?route=admin_root [NC,QSA,L]
+RewriteRule ^Admin/login\.php$ index.php?route=login&type=admin [NC,QSA,L]
+RewriteRule ^Admin/dashboard\.php$ index.php?route=admin/dashboard [NC,QSA,L]
+RewriteRule ^Admin/users\.php$ index.php?route=admin/users [NC,QSA,L]
+RewriteRule ^Admin/income\.php$ index.php?route=admin/income [NC,QSA,L]
+RewriteRule ^Admin/transactions\.php$ index.php?route=admin/transactions [NC,QSA,L]
+RewriteRule ^Admin/requests\.php$ index.php?route=admin/requests [NC,QSA,L]
+RewriteRule ^Admin/settings\.php$ index.php?route=admin/settings [NC,QSA,L]
+RewriteRule ^Admin/manage-clients-data\.php$ index.php?route=admin/manage-clients-data [NC,QSA,L]
+RewriteRule ^Admin/manage-tutorials\.php$ index.php?route=admin/manage-tutorials [NC,QSA,L]
+
+# User Routes
+RewriteRule ^User/?$ index.php?route=user_root [NC,QSA,L]
+RewriteRule ^User/login\.php$ index.php?route=login&type=user [NC,QSA,L]
+RewriteRule ^User/dashboard\.php$ index.php?route=user/dashboard [NC,QSA,L]
+RewriteRule ^User/history\.php$ index.php?route=user/history [NC,QSA,L]
+RewriteRule ^User/support\.php$ index.php?route=user/support [NC,QSA,L]
+RewriteRule ^User/add-income\.php$ index.php?route=user/add-income [NC,QSA,L]
+RewriteRule ^User/clients\.php$ index.php?route=user/clients [NC,QSA,L]
+RewriteRule ^User/tools\.php$ index.php?route=user/tools [NC,QSA,L]
+RewriteRule ^User/clients-data\.php$ index.php?route=user/clients-data [NC,QSA,L]
+RewriteRule ^User/tutorials\.php$ index.php?route=user/tutorials [NC,QSA,L]
+
+# Shared Routes
+RewriteRule ^Shared/notifications\.php$ index.php?route=shared/notifications [NC,QSA,L]
+RewriteRule ^Shared/poll/?$ index.php?route=shared/poll [NC,QSA,L]
+RewriteRule ^Shared/mark-all-read/?$ index.php?route=shared/mark-all-read [NC,QSA,L]
+
+# Global logout and register
+RewriteRule ^logout\.php$ index.php?route=logout [QSA,L]
+RewriteRule ^register\.php$ index.php?route=register [QSA,L]
+
+# Optional: Force HTTPS (uncomment if using SSL on Hostinger)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
